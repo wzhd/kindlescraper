@@ -1,3 +1,5 @@
+import argparse
+
 class Clipping:
     
     type = ""
@@ -29,30 +31,21 @@ class Clipping:
         
         if (self.type != "Bookmark"):
             self.content = chunkLines[-2]
-            
+
+p = argparse.ArgumentParser(description='scrap kindle notes')
+p.add_argument('filename', help='path to a text file in kindle format')
+args = p.parse_args()
+
 # print welcome message
 
 print "Kindle Scraper 1.0. Copyright 2011 Shubhro Saha"
 
-# load the file, and if not found, keep waiting.
-
-foundKindle = False
 
 try:
-    f = open("/Volumes/Kindle/documents/My Clippings.txt", 'r')
-    foundKindle = True
+    f = open(args.filename, 'r')
 except:
-    print "Kindle not detected. Please plug it in now."
-    foundKindle = False
-
-while (foundKindle == False):
-    try:
-        f = open("/Volumes/Kindle/documents/My Clippings.txt", 'r')
-        foundKindle = True
-    except:
-        foundKindle = False
-        
-print "Kindle detected."
+    print("Failed to open the file %s." % args.filename)
+    exit()
 
 # split file into list of clippings' content and show how many found
 
