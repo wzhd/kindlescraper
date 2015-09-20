@@ -7,20 +7,20 @@ args = p.parse_args()
 
 # print welcome message
 
-print "Kindle Scraper 1.0. Copyright 2011 Shubhro Saha"
+print("Kindle Scraper 1.0. Copyright 2011 Shubhro Saha")
 
 
 try:
     f = open(args.filename, 'r')
 except:
-    print("Failed to open the file %s." % args.filename)
+    print(("Failed to open the file %s." % args.filename))
     exit()
 
 # split file into list of clippings' content and show how many found
 
 clippingListChunks = f.read().split("==========")
 
-print str(len(clippingListChunks)) + " clippings found."
+print(str(len(clippingListChunks)) + " clippings found.")
 
 # convert clipping chunks of content into list of Clipping objects
 
@@ -41,12 +41,12 @@ for c in clippingList:
         uniqueTitles.append(c.title)
 
 i = 0
-print "Please indicate the title you wish to retrieve highlights for."
+print("Please indicate the title you wish to retrieve highlights for.")
 for title in uniqueTitles:
-    print "[" + str(i) + "] " + title
+    print("[" + str(i) + "] " + title)
     i = i + 1
     
-titleIndex = int(raw_input("Title Index #: "))
+titleIndex = int(input("Title Index #: "))
 title = uniqueTitles[titleIndex]
 
 # bring together all highlights for that title
@@ -57,7 +57,7 @@ for c in clippingList:
     if (c.title == title):
         if (c.type == "Highlight"):
             #output = output + c.content + "\n\n"
-            print c.content + "\n"
+            print(c.content + "\n")
             
             
 ## write output to file
